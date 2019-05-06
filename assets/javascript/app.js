@@ -48,10 +48,14 @@ $(document).ready(function(){
                 // Creating an image tag
                 var animalImage = $("<img>");
 
-                // Giving the image tag an src attribute of a proprty pulled off the
-                // result item
+
+                // Giving the image tag an src attribute of a proprrty pulled off the result item
                 animalImage.attr("src", results[i].images.fixed_height_still.url);
                 animalImage.attr("alt", animal);
+                // add attributes for animate state
+                animalImage.attr("data-still", results[i].images.fixed_height_still.url);
+                animalImage.attr("data-animate", results[i].images.fixed_height.url);
+                animalImage.attr("data-state", "still")
 
                 // Appending the paragraph and animalImage we created to the "gifDiv" div we created
                 gifDiv.append(p);
@@ -60,12 +64,22 @@ $(document).ready(function(){
                 // make div to hold gifs
                 $("#gifs").prepend(gifDiv);
 
+                // add click listener for data-state
+                $('img').on("click", function(){
+                    var state = $(this).attr("data-state");
+
+                if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
+                    } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                  }
+            
+                })
+
             }
 
-            // // add gif rating to columns div
-            // $('#gifs').prepend('<p>').text(response.data.rating);
-            // // add gifs to column div
-            // $('#gifs').prepend('<img src="' + response.data.images.fixed_height_still.url + ' "alt=" ' + animal + ' " /> ')
         })
 
     })
