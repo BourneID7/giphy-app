@@ -20,9 +20,32 @@ $(document).ready(function(){
     }
     makeButton();
 
-    //
+    // create form to allow user to add their own animal button
+    function makeForm() {
+        var form = $('<form id="userButton">');
+        var formGroup = $('<div class="form-group">');
+        var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
+        var input = $('<input type="text" class="input" value="">');
+        var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
+        form.append(formGroup);
+        formGroup.append(label);
+        label.append(input);
+        form.append(submit);
+
+        $("#add-button").append(form);
+    
+    }
+    makeForm();
+
+
+    // function to add user animal from form to topics array
+    
+
+
+
+    // 
     $(".animal").on("click", function() {
-        // Grabbing and storing the data-name property value from the button
+        // Grab and store the data-name property value from the button
         var animal = $(this).attr("data-name");
         var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + api_key + "&limit=10";
 
@@ -36,28 +59,28 @@ $(document).ready(function(){
             // loop over each item in response data array
             var results = response.data;
             for (var i = 0; i < results.length; i++) {
-                // Creating a div for the gif
+                // Create a div for the gif
                 var gifDiv = $("<div>").addClass(".gifs");
 
-                // Storing the result item's rating
+                // Store the result item's rating
                 var rating = results[i].rating;
 
-                // Creating a paragraph tag with the result item's rating
+                // Create a paragraph tag with the result item's rating
                 var p = $("<p>").text("Rated " + rating.toUpperCase());
 
-                // Creating an image tag
+                // Create an image tag
                 var animalImage = $("<img>");
 
 
-                // Giving the image tag an src attribute of a proprrty pulled off the result item
+                // Give the image tag an src attribute of a proprrty pulled off the result item
                 animalImage.attr("src", results[i].images.fixed_height_still.url);
                 animalImage.attr("alt", animal);
-                // add attributes for animate state
+                // add attributes for animate states
                 animalImage.attr("data-still", results[i].images.fixed_height_still.url);
                 animalImage.attr("data-animate", results[i].images.fixed_height.url);
                 animalImage.attr("data-state", "still")
 
-                // Appending the paragraph and animalImage we created to the "gifDiv" div we created
+                // Append the paragraph and animalImage to the "gifDiv"
                 gifDiv.append(p);
                 gifDiv.append(animalImage);
 
