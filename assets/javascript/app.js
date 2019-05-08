@@ -37,7 +37,7 @@ $(document).ready(function(){
             makeButton();
         }) 
 
-        // loop through array
+        // loop through array to create buttons & add data-name
         for (var i = 0; i < topics.length; i++) {
             var button = $('<button class="btn btn-secondary animal">');
             button.attr("data-name", topics[i]);
@@ -48,35 +48,6 @@ $(document).ready(function(){
 
     makeButton();
 
-    /*
-    // create form to allow user to add their own animal button
-    function makeForm() {
-        var form = $('<form id="userButton">');
-        var formGroup = $('<div class="form-group">');
-        var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
-        var input = $('<input type="text" class="input" value="">');
-        var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
-        form.append(formGroup);
-        formGroup.append(label);
-        label.append(input);
-        form.append(submit);
-
-        $("#add-button").append(form);
-    
-    }
-    makeForm();
-
-    // on click submit button add user animal from form to topics array
-    
-        $("#submit").on("click", function(event) {
-            event.preventDefault();
-            var userAnimal = $(".input").val();
-            //userAnimal.attr("data-name", topics[i])
-            topics.push(userAnimal);
-            makeButton();
-        })
-
-        */
     
     // function to get giphy image on button click
     $(".animal").on("click", function() {
@@ -94,16 +65,16 @@ $(document).ready(function(){
             var results = response.data;
             for (var i = 0; i < results.length; i++) {
                 // Create a div for the gif
-                var gifDiv = $("<div>").addClass(".gifs");
+                var gifDiv = $("<div>");
 
                 // Store the result item's rating
                 var rating = results[i].rating;
 
                 // Create a paragraph tag with the result item's rating
-                var p = $("<p>").text("Rated " + rating.toUpperCase());
+                var p = $('<p class="rating">').text("Rated " + rating.toUpperCase());
 
                 // Create an image tag
-                var animalImage = $("<img>");
+                var animalImage = $('<img class="gifs">');
 
 
                 // Give the image tag an src attribute of a proprrty pulled off the result item

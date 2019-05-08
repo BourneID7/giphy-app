@@ -5,11 +5,22 @@ h1 {
     margin: 10px;
 }
 .gifs {
-    max-width: 30%;
+    max-width: 100%;
     float: left;
     margin: 10px;
 }
 .input {
     margin-top: 10px;
     width: 100%;
+}
+.center {
+    text-align: center;
+}
+.grid-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.rating {
+    margin-bottom: 0;
 }
