@@ -9,6 +9,33 @@ $(document).ready(function(){
     function makeButton() {
         // prevent duplicate buttons
         $("#buttons").empty();
+        $("#add-button").empty();
+        
+        // create form to allow user to add their own animal button
+        
+        function makeForm() {
+            var form = $('<form id="userButton">');
+            var formGroup = $('<div class="form-group">');
+            var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
+            var input = $('<input type="text" class="input" value="">');
+            var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
+            form.append(formGroup);
+            formGroup.append(label);
+            label.append(input);
+            form.append(submit);
+
+            $("#add-button").append(form);
+        }
+        makeForm();
+
+        // on click submit button add user animal from form to topics array
+
+        $("#submit").on("click", function(event) {
+            event.preventDefault();
+            var userAnimal = $(".input").val();
+            topics.push(userAnimal);
+            makeButton();
+        }) 
 
         // loop through array
         for (var i = 0; i < topics.length; i++) {
@@ -18,8 +45,10 @@ $(document).ready(function(){
             $("#buttons").append(button);
         }
     }
+
     makeButton();
 
+    /*
     // create form to allow user to add their own animal button
     function makeForm() {
         var form = $('<form id="userButton">');
@@ -37,18 +66,23 @@ $(document).ready(function(){
     }
     makeForm();
 
-
-    // function to add user animal from form to topics array
+    // on click submit button add user animal from form to topics array
     
+        $("#submit").on("click", function(event) {
+            event.preventDefault();
+            var userAnimal = $(".input").val();
+            //userAnimal.attr("data-name", topics[i])
+            topics.push(userAnimal);
+            makeButton();
+        })
 
-
-
-    // 
+        */
+    
+    // function to get giphy image on button click
     $(".animal").on("click", function() {
         // Grab and store the data-name property value from the button
         var animal = $(this).attr("data-name");
         var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + api_key + "&limit=10";
-
         $.ajax({
             url: queryUrl,
             method: "GET"
