@@ -9,35 +9,6 @@ $(document).ready(function(){
     function makeButton() {
         // prevent duplicate buttons
         $("#buttons").empty();
-        $("#add-button").empty();
-        
-        // create form to allow user to add their own animal button
-        
-        function makeForm() {
-            var form = $('<form id="userButton">');
-            var formGroup = $('<div class="form-group">');
-            var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
-            var input = $('<input type="text" class="input" value="">');
-            var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
-            $("#submit").attr("disabled", false);
-            form.append(formGroup);
-            formGroup.append(label);
-            label.append(input);
-            form.append(submit);
-
-            $("#add-button").append(form);
-        }
-        makeForm();
-
-        // on click submit button add user animal from form to topics array
-
-        $("#submit").on("click", function(event) {
-            event.preventDefault();
-            var userAnimal = $(".input").val().trim();
-            topics.push(userAnimal);
-            makeButton();
-            console.log(userAnimal);
-        }) 
 
         // loop through array to create buttons & add data-name
         for (var i = 0; i < topics.length; i++) {
@@ -50,9 +21,37 @@ $(document).ready(function(){
     }
     makeButton();
 
+    // create form to allow user to add their own animal button
+
+    function makeForm() {
+        var form = $('<form id="userButton">');
+        var formGroup = $('<div class="form-group">');
+        var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
+        var input = $('<input type="text" class="input" value="">');
+        var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
+        $("#submit").attr("disabled", false);
+        form.append(formGroup);
+        formGroup.append(label);
+        label.append(input);
+        form.append(submit);
+
+        $("#add-button").append(form);
+    }
+    makeForm();
+
+    // on click submit button add user animal from form to topics array
+
+    $("#submit").on("click", function(event) {
+        event.preventDefault();
+        var userAnimal = $(".input").val().trim();
+        topics.push(userAnimal);
+        makeButton();
+        console.log(userAnimal);
+    }) 
+
     
     // function to get giphy image on button click
-    $(".animal").on("click", function() {
+    $("body").on("click", ".animal", function() {
         // Grab and store the data-name property value from the button
         var animal = $(this).attr("data-name");
         var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=" + api_key + "&limit=10";
