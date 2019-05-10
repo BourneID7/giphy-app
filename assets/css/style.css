@@ -1,5 +1,15 @@
+header {
+    background-image: url(../images/header.jpg);
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 20px;
+}
 h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
     text-align: center;
+    color: #fff;
+    margin-top: 40px;
 }
 .btn {
     margin: 10px;
