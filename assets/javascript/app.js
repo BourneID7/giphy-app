@@ -19,6 +19,7 @@ $(document).ready(function(){
             var label = $('<label class="user-animal">').text("Want to visit another area of the zoo? Add your own animal here.");
             var input = $('<input type="text" class="input" value="">');
             var submit = $('<button id="submit" type="submit" class="btn btn-secondary">').text("Submit");
+            $("#submit").attr("disabled", false);
             form.append(formGroup);
             formGroup.append(label);
             label.append(input);
@@ -32,9 +33,10 @@ $(document).ready(function(){
 
         $("#submit").on("click", function(event) {
             event.preventDefault();
-            var userAnimal = $(".input").val();
+            var userAnimal = $(".input").val().trim();
             topics.push(userAnimal);
             makeButton();
+            console.log(userAnimal);
         }) 
 
         // loop through array to create buttons & add data-name
@@ -43,9 +45,9 @@ $(document).ready(function(){
             button.attr("data-name", topics[i]);
             button.text(topics[i]);
             $("#buttons").append(button);
+
         }
     }
-
     makeButton();
 
     
