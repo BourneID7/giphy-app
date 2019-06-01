@@ -1,6 +1,7 @@
-# giphy-app
-## Welcome to the zoo
+# Welcome to the zoo
+This app was created using javascript and an Ajax call to the Giphy API to view animal images.
 
+## Instructions
 Click on a button to load still imagaes of that animal from the giphy API.
 
 Click on an image to watch the animation. If you click again on the same image, the animation will stop, returning to the original still image.
